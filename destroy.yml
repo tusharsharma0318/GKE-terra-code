@@ -1,0 +1,37 @@
+name: Terraform Destroy
+ 
+on:
+  workflow_dispatch:
+ 
+permissions:
+  contents: read
+ 
+jobs:
+  destroy:
+ 
+    runs-on: ubuntu-latest
+ 
+    env:
+      GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS__FOR_GKE }}
+ 
+    steps:
+ 
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+ 
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS__FOR_GKE }}
+ 
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+ 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+ 
+      - name: Terraform Init
+        run: terraform init
+ 
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
