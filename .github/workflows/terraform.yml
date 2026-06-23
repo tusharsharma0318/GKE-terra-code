@@ -14,6 +14,9 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
 
+    env:
+      GOOGLE_CREDENTIALS: ${{ secrets.GKESERVICEACCOUNT }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -24,11 +27,11 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: '${{ secrets.GKESERVICEACCOUNT }}'
-
+          credentials_json: ${{ secrets.GKESERVICEACCOUNT }}
+ 
       - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2    
-
+        uses: google-github-actions/setup-gcloud@v2
+ 
       - name: Install GKE Auth Plugin
         run: |
           gcloud components install gke-gcloud-auth-plugin --quiet    
