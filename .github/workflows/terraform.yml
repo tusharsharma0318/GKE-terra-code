@@ -64,7 +64,7 @@ jobs:
         run: kubectl get nodes
  
       - name: Deploy Kubernetes Resources
-        run: kubectl apply -f k8s-yamlfiles/
+        run: kubectl apply -f k8s-yamlfile/
  
       - name: Verify Pods
         run: kubectl get pods
