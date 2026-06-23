@@ -46,9 +46,9 @@ jobs:
  
       - name: Get Cluster Credentials
         run: |
-          gcloud container clusters get-credentials vibs-gke-cluster \
+          gcloud container clusters get-credentials tus-gke-cluster-1 \
           --region us-east4 \
-          --project ${{ secrets.GCP_PROJECT_ID }}
+          --project ${{ secrets.PROJECT_ID }}
  
       - name: Verify Cluster
         run: kubectl get nodes

@@ -22,7 +22,7 @@ resource "google_compute_subnetwork" "subnet" {
 }
 
 resource "google_compute_firewall" "allow-internal" {
-  name    = "internal-firewall"
+  name    = "internal-firewall-1"
   network = google_compute_network.vpc_network.id
 
   allow {
@@ -48,7 +48,7 @@ resource "google_compute_router_nat" "nat" {
 
 resource "google_container_cluster" "primary" {
 
-  name                     = "gke-cluster-1"
+  name                     = "tus-gke-cluster-1"
   location                 = "us-east4"
   network                  = google_compute_network.vpc_network.id
   subnetwork               = google_compute_subnetwork.subnet.id
